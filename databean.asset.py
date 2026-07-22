@@ -632,7 +632,7 @@ def buildSingleFactorsAndDriverRowClausePart(assetType, assetField, specValue, o
             else:
                 user_filters = "({0})".format(condition)
             
-        sql_template = """ exists (select 1 from maximo.eg_v_drivers_factors b where b.ownerrecordid = asset.assetid and
+        sql_template = """ asset.assetid in (select b.ownerrecordid from maximo.eg_v_drivers_factors b where
             {user_filters})
             """
         clausePart = sql_template.format(user_filters=user_filters)
